@@ -11,7 +11,7 @@ Currently these functions are available:
 
 ## Restrictions
 
-The MPU6050 is read throug the I2C bus. This is quite limiting as it delivers not enough data per second. Just a few hundred measures is not enough to measure vibration frequency. The results are good to compare motors or propellers reasonably. For proper analysis of the concrete frequency with highest vibrations a different sensor is required. 
+The MPU6050 is controlled through the I2C bus. This is quite limiting as it delivers not enough data per second. Just a few hundred measures is not enough to measure vibration frequency higher than a few hundred Hz. The results are good to compare motors or propellers reasonably anyway. For proper analysis of the concrete frequency with the strongest vibrations different sensors are required. 
 
 ## Planned Enhancements
 
