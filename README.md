@@ -1,2 +1,2 @@
 # vibrator
-A devices for vibration analysis for brushless motors and propellers. 
+A device for vibration analysis for brushless motors and propellers. 
