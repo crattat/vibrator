@@ -1,6 +1,11 @@
 # vibrator
 The vibrator is a device for vibration analysis for brushless motors and propellers. Currently it uses a MPU6050 chip for vibration analysis and an OPB732 photoelectric sensor to measure the revolution. All together is controlled with an Arduino Due and a touch display with a SD card interface. 
 
+# Hardware
+I'm using an Arduino Due from SainSmart together with an SD-Shield and 2.8" touch display. To wire the sensors and ESC a protoshield is put between SD shield and Arduino. In the cases folder you will find 3D designs and ready to print STL files for cases for the Arduino and also for the sensors to mount it properly. 
+
+# Functions
+
 Currently these functions are available:
 
 * Just measure and log revolution to a logfile to SD card
