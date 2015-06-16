@@ -23,7 +23,7 @@ Extensions for the vibrator will be:
 * A weighing cell to measure thrust during the tests. 
 
 ## Notes
-To get the 2.8" SainSmart touch giving the correct coordinates the following defines have been adjusted:
+To get the 2.8" SainSmart touch giving the correct coordinates the following defines have been adjusted in IDB02_touch.cpp:
 
 
 ```c++
