@@ -6,7 +6,7 @@
 // =========================================================================
 
 // The photo sensor is connected to this pin
-#define REV_METER_PIN A6
+#define REV_METER_PIN A0
 
 // The range of ESC in microseconds is 1200, 0 means off, 1200 means 100%
 #define REV_ESC_RANGE 1200

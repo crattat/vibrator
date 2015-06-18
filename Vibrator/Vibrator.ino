@@ -84,6 +84,7 @@ volatile int      _escLastLevel = 0;
 uint32_t         _testStart;
 uint8_t          _step;
 
+volatile  int32_t _revvalue = 0;
 
 // =========================================================================
 // 60 kHz timer to measure the revolution. To be accurate enough it is
@@ -95,11 +96,16 @@ uint8_t          _step;
 void measureRevolutionTimer()
 {
   // measure revolution
-  int32_t _revvalue = analogRead(REV_METER_PIN);
+  // wait until channel 0 completed conversion
+  while ((ADC->ADC_ISR & 0x80) == 0);
+  // read channel 0
+  _revvalue = ADC->ADC_CDR[7];
+  // this is the normal analogRead which takes 40us by default, which is too slow for 60 kHz
+  // int32_t _revvalue = analogRead(REV_METER_PIN);
   _revcount++;
 
   // here we measure low-high slopes
-  if (_revvalue < 120)
+  if (_revvalue < 1000)
   {
     // if already low don't measure
     if (!_revlow)
@@ -503,12 +509,20 @@ void setup()
 
   initializeIMU();
 
+  // initialize the ADC to run in free running mode. This allows conversion in 1 us.
+  ADC->ADC_MR |= 0x80;
+  // start conversion
+  ADC->ADC_CR = 2;
+  // enable ADC channel 0
+  ADC->ADC_CHER = 0x80;
+
+  delay(500);
 
   Timer1.attachInterrupt(measureRevolutionTimer).setFrequency(TIMER_REVOLUTION_FREQUENCY).start();
   Timer6.attachInterrupt(controlServoTimer).setFrequency(TIMER_SERVO_FREQUENCY).start();
   Serial.println("Timers started");
 
-  delay(1000);
+  delay(500);
 
   Serial.println("Initialization done");
 }
@@ -544,6 +558,7 @@ void loop()
   {
     _last25msUpdate = t;
     update25();
+    Serial.println(_revvalue);
   }
 
   // run updates every 10ms
