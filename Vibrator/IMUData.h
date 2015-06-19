@@ -36,15 +36,13 @@ class IMUData
     //=========================================================
     // Gets the temperature in degree celsius. The datasheet
     // for the MPU6050 defines a resolution of 340 per degree
-    // celsius and a valu of -512 at 35 degrees. 
-    // Thus this brings the value measured to zero: 
-    // corrected value = measured value -512 - 340 * 35
-    // The resulting value is scaled by 340 then and to get
-    // the value in degree celsius it must be divided by 340. 
+    // celsius and a value of -521 at 35 degrees. 
+    // To convert the measured value to °C use this formula:
+    // °C = (measured value + 521 + 340 * 35) / 340
     //=========================================================
     int16_t TemperatureC()
     {
-      return (t - (-512 - 340 * 35)) / 340;
+      return (t + 521 + 340 * 35) / 340;
     }
 
     //=========================================================
